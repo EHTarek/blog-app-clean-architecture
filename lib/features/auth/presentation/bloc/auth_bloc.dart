@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'auth_event.dart';
+
 part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
@@ -15,6 +16,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final UserLogin _userLogin;
   final CurrentUser _currentUser;
   final AppUserCubit _appUserCubit;
+
   AuthBloc({
     required UserSignUp userSignUp,
     required UserLogin userLogin,
@@ -31,10 +33,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<AuthIsUserLoggedIn>(_isUserLoggedIn);
   }
 
-  void _isUserLoggedIn(
-    AuthIsUserLoggedIn event,
-    Emitter<AuthState> emit,
-  ) async {
+  void _isUserLoggedIn(AuthIsUserLoggedIn event, Emitter<AuthState> emit) async {
     final res = await _currentUser(NoParams());
 
     res.fold(
@@ -43,10 +42,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  void _onAuthSignUp(
-    AuthSignUp event,
-    Emitter<AuthState> emit,
-  ) async {
+  void _onAuthSignUp(AuthSignUp event, Emitter<AuthState> emit) async {
     final res = await _userSignUp(
       UserSignUpParams(
         email: event.email,
@@ -61,10 +57,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  void _onAuthLogin(
-    AuthLogin event,
-    Emitter<AuthState> emit,
-  ) async {
+  void _onAuthLogin(AuthLogin event, Emitter<AuthState> emit) async {
     final res = await _userLogin(
       UserLoginParams(
         email: event.email,
@@ -78,10 +71,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  void _emitAuthSuccess(
-    User user,
-    Emitter<AuthState> emit,
-  ) {
+  void _emitAuthSuccess(User user, Emitter<AuthState> emit) {
     _appUserCubit.updateUser(user);
     emit(AuthSuccess(user));
   }

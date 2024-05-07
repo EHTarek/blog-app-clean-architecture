@@ -11,6 +11,7 @@ import 'package:fpdart/fpdart.dart';
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource remoteDataSource;
   final ConnectionChecker connectionChecker;
+
   const AuthRepositoryImpl(
     this.remoteDataSource,
     this.connectionChecker,

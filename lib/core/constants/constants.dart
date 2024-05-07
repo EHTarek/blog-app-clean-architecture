@@ -1,4 +1,5 @@
 class Constants {
+  static const appName = 'ASM TV';
   static const List<String> topics = [
     'Technology',
     'Business',
